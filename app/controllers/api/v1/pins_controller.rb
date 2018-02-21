@@ -1,5 +1,5 @@
 class Api::V1::PinsController < ApplicationController
-  before_action :restrict_access, only: [:create]
+  before_action :restrict_access, only: [:index, :create]
 
   def index
     render json: Pin.all.order('created_at DESC')
