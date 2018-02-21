@@ -24,10 +24,7 @@ class Api::V1::PinsController < ApplicationController
       email = request.headers['X-User-Email']
       token = request.headers['X-Api-Token']
 
-      #authenticate_or_request_with_http_token do |token, options|
-      #  User.find_by(api_token: token,email: email).present?
-      #end
-      @current_user = User.where(email: email)
+      @current_user = User.where(email: email).take
       unless @current_user && @current_user.api_token == token
         head 401
       end
