@@ -14,6 +14,15 @@ class Api::V1::PinsController < ApplicationController
     end
   end
 
+  def destroy
+    pin = Pin.find(params[:id])
+    if pin.destroy
+      render json: pin, status: 200
+    else
+      render json: { errors: pin.errors }, status: 422
+    end  
+  end
+
   private
     def pin_params
       params.require(:pin).permit(:title, :image_url)
